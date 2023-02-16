@@ -15,44 +15,44 @@ vim /etc/modules-load.d/containerd.conf
 <br>modprobe br_netfilter<br>
 
 #Step 4: Create a file with the name kubernetes.conf in /etc/sysctl.d folder:
-vim /etc/sysctl.d/kubernetes.conf
+<br>vim /etc/sysctl.d/kubernetes.conf<br>
 
 #Add the following lines in the file and Save it:
-net.bridge.bridge-nf-call-ip6tables = 1
-net.bridge.bridge-nf-call-iptables = 1
-net.ipv4.ip_forward = 1
+<br>net.bridge.bridge-nf-call-ip6tables = 1<br>
+<br>net.bridge.bridge-nf-call-iptables = 1<br>
+<br>net.ipv4.ip_forward = 1<br>
 
 #Step 5: Run the commands to verify the changes:
-sysctl --system
-sysctl -p
+<br>sysctl --system<br>
+<br>sysctl -p<br>
 
 #Step 6: Remove the config.toml file from /etc/containerd/ Folder and run reload your system daemon:
-rm -f /etc/containerd/config.toml
-systemctl daemon-reload
+<br>rm -f /etc/containerd/config.toml<br>
+<br>systemctl daemon-reload<br>
 
 #Step 7: Add Kubernetes Repository:
-apt-get update && apt-get install -y apt-transport-https ca-certificates curl
+<br>apt-get update && apt-get install -y apt-transport-https ca-certificates curl
 curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
-echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
+echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list<br>
 
 #Step 8: Disable Swap
-vim /etc/fstab    (Remove swap mount point from this file)
-swapoff -a
+<br>vim /etc/fstab <br>   (Remove swap mount point from this file)
+<br>swapoff -a<br>
 
 #Step 9: Export the environment variable:
-export KUBE_VERSION=1.23.0
+<br>export KUBE_VERSION=1.23.0<br>
 
 #Step 10: Install Kubernetes:
-apt-get update
+<br>apt-get update
 apt-get install -y kubelet=${KUBE_VERSION}-00 kubeadm=${KUBE_VERSION}-00 kubectl=${KUBE_VERSION}-00 kubernetes-cni=0.8.7-00
 apt-mark hold kubelet kubeadm kubectl
 systemctl enable kubelet
-systemctl start kubelet
+systemctl start kubelet<br>
 
 #Step 11: Now it's time to initialize our Cluster!
 ---MASTER NODE ONLY---
-kubeadm init --kubernetes-version=${KUBE_VERSION} (Only on master node)
-kubeadm token create --print-join-command (To regenrate the tokens)
+<br>kubeadm init --kubernetes-version=${KUBE_VERSION} (Only on master node)<br>
+<br>kubeadm token create --print-join-command (To regenrate the tokens)<br>
 
 #Step 12:
 cp /etc/kubernetes/admin.conf /root/
