@@ -7,8 +7,8 @@ Step 2:  Create a file with the name containerd.conf using the command:
 vim /etc/modules-load.d/containerd.conf
 
 #And add the following lines:
-<br>overlay
-br_netfilter<br>
+<br>overlay<br>
+<br>br_netfilter<br>
 
 #Step 3: Save the file and run the following commands:
 modprobe overlay
