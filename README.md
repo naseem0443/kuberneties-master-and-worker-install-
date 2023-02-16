@@ -11,8 +11,8 @@ vim /etc/modules-load.d/containerd.conf
 <br>br_netfilter<br>
 
 #Step 3: Save the file and run the following commands:
-modprobe overlay
-modprobe br_netfilter
+<br>modprobe overlay<br>
+<br>modprobe br_netfilter<br>
 
 #Step 4: Create a file with the name kubernetes.conf in /etc/sysctl.d folder:
 vim /etc/sysctl.d/kubernetes.conf
