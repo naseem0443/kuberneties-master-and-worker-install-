@@ -55,13 +55,13 @@ systemctl start kubelet<br>
 <br>kubeadm token create --print-join-command (To regenrate the tokens)<br>
 
 #Step 12:
-cp /etc/kubernetes/admin.conf /root/
+<br>cp /etc/kubernetes/admin.conf /root/
 chown $(id -u):$(id -g) /root/admin.conf
 export KUBECONFIG=/root/admin.conf
-echo 'export KUBECONFIG=/root/admin.conf' >> /root/.bashrc
+echo 'export KUBECONFIG=/root/admin.conf' >> /root/.bashrc<br>
 
 #Step 13: Download the daemonset yaml file of required version like following link:
-wget https://github.com/weaveworks/weave/releases/download/v2.8.1/weave-daemonset-k8s.yaml
+<br>wget https://github.com/weaveworks/weave/releases/download/v2.8.1/weave-daemonset-k8s.yaml<br>
 
-Step 14: Now apply the daemonset yaml!
-kubectl apply -f weave-daemonset-k8s.yaml
+#Step 14: Now apply the daemonset yaml!
+<br>kubectl apply -f weave-daemonset-k8s.yaml<br>
