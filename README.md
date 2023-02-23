@@ -52,7 +52,9 @@ systemctl start kubelet<br>
 #Step 11: Now it's time to initialize our Cluster!
 ---MASTER NODE ONLY---
 <br>kubeadm init --kubernetes-version=${KUBE_VERSION} (Only on master node)<br>
+NOTE:- above command give you 1 output then you have to copy that output in your worker node.
 <br>kubeadm token create --print-join-command (To regenrate the tokens)<br>
+NOTE:- If your setup is done, and agin you want to add more worker node then you have to generate token by above command
 
 #Step 12:
 <br>cp /etc/kubernetes/admin.conf /root/
