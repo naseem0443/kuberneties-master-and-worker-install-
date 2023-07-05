@@ -32,21 +32,20 @@ apt-get update && apt-get install -y apt-transport-https ca-certificates curl
 curl -fsSL https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-archive-keyring.gpg
 
 echo "deb [signed-by=/etc/apt/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
+#if  Kubernetes Repository not working then use offical docs
+link -- https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#check-required-ports
 
 Step 8: Disable Swap
 vim /etc/fstab    (Remove swap mount point from this file)
 swapoff -a
 
 Step 9: Export the environment variable:
-kubeadm version
-v1.27.3
 
-export KUBE_VERSION=1.27.3
 
 
 Step 10: Install Kubernetes:
 apt-get update
-apt-get install -y kubelet=${KUBE_VERSION}-00 kubeadm=${KUBE_VERSION}-00 kubectl=${KUBE_VERSION}-00 kubernetes-cni=0.8.7-00
+sudo apt-get install -y kubelet kubeadm kubectl kubernetes-cni=0.8.7-00
 apt-mark hold kubelet kubeadm kubectl
 systemctl enable kubelet
 systemctl start kubelet
