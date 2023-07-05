@@ -38,7 +38,11 @@ vim /etc/fstab    (Remove swap mount point from this file)
 swapoff -a
 
 Step 9: Export the environment variable:
-export KUBE_VERSION=1.23.0
+kubeadm version
+v1.27.3
+
+export KUBE_VERSION=1.27.3
+
 
 Step 10: Install Kubernetes:
 apt-get update
