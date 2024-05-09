@@ -48,34 +48,45 @@ sudo apt install -y kubeadm=1.28.1-1.1 kubelet=1.28.1-1.1 kubectl=1.28.1-1.1
 
 ```
 #Step 8: Disable Swap
-<br>vim /etc/fstab <br>   (Remove swap mount point from this file)
-<br>swapoff -a<br>
+```
+vim /etc/fstab
+```
 
-#Step 9: Export the environment variable:
-<br>export KUBE_VERSION=1.23.0<br>
-
+   (Remove swap mount point from this file)
+   ```
+swapoff -a
+```
 #Step 10: Install Kubernetes:
-<br>apt-get update
-apt-get install -y kubelet=${KUBE_VERSION}-00 kubeadm=${KUBE_VERSION}-00 kubectl=${KUBE_VERSION}-00 kubernetes-cni=0.8.7-00
+```
 apt-mark hold kubelet kubeadm kubectl
 systemctl enable kubelet
-systemctl start kubelet<br>
+systemctl start kubelet
+```
 
 #Step 11: Now it's time to initialize our Cluster!
 ---MASTER NODE ONLY---
 <br>kubeadm init --kubernetes-version=${KUBE_VERSION} (Only on master node)<br>
 NOTE:- above command give you 1 output then you have to copy that output in your worker node.
-<br>kubeadm token create --print-join-command (To regenrate the tokens)<br>
+```
+kubeadm token create --print-join-command
+``` (To regenrate the tokens)<br>
 NOTE:- If your setup is done, and agin you want to add more worker node then you have to generate token by above command
 
 #Step 12:
-<br>cp /etc/kubernetes/admin.conf /root/
-chown $(id -u):$(id -g) /root/admin.conf
+```
+cp /etc/kubernetes/admin.conf /root/
+chown root:$(id -g) /root/admin.conf
 export KUBECONFIG=/root/admin.conf
-echo 'export KUBECONFIG=/root/admin.conf' >> /root/.bashrc<br>
+echo 'export KUBECONFIG=/root/admin.conf' >> /root/.bashrc
+
+```
 
 #Step 13: Download the daemonset yaml file of required version like following link:
-<br>wget https://github.com/weaveworks/weave/releases/download/v2.8.1/weave-daemonset-k8s.yaml<br>
+```
+wget https://github.com/weaveworks/weave/releases/download/v2.8.1/weave-daemonset-k8s.yaml
+```
 
 #Step 14: Now apply the daemonset yaml!
-<br>kubectl apply -f weave-daemonset-k8s.yaml<br>
+```
+kubectl apply -f weave-daemonset-k8s.yaml
+```
