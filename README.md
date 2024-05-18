@@ -105,9 +105,9 @@ echo 'export KUBECONFIG=/root/admin.conf' >> /root/.bashrc
 
 ```
 
-#Step 13: Download the daemonset yaml file of required version like following link:
+#Step 13: Download the daemonset yaml file of required version like following link:   updat link https://github.com/weaveworks/weave/blob/master/site/kubernetes/kube-addon.md
 ```
-wget https://github.com/weaveworks/weave/releases/download/v2.8.1/weave-daemonset-k8s.yaml
+kubectl apply -f https://github.com/weaveworks/weave/releases/download/v2.8.1/weave-daemonset-k8s.yaml
 ```
 
 #Step 14: Now apply the daemonset yaml!
