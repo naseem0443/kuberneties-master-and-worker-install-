@@ -1,6 +1,11 @@
 # kuberneties-master-and-worker-install-
 Before start please install docker on all node 
+```
+apt install docker.io -y
+systemctl start docker
+systemctl enable docker
 
+```
 Step 1: Login with root user and Install Docker ( in Master & Worker Node Both)
 
 Step 2:  Create a file with the name containerd.conf using the command:
@@ -63,9 +68,7 @@ sudo apt install -y kubeadm  kubelet kubectl
 ```
 #Step 8: Disable Swap
 
-```
-vim /etc/fstab
-```
+
 ```
 swapoff -a
 ```
@@ -83,7 +86,13 @@ systemctl start kubelet
 # ---MASTER NODE ONLY---
 (Only on master node) 
 ```
-kubeadm init --kubernetes-version=${KUBE_VERSION}
+kubeadm init --pod-network-cidr=172.0.0.0/16
+
+```
+# if geeting init error then
+```
+kubeadm init --pod-network-cidr=172.0.0.0/16 --ignore-preflight-errors=all
+
 ```
 
 # NOTE:- above command give you 1 output then you have to copy that output in your worker node.
